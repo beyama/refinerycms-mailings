@@ -1,0 +1,15 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(mailing_template) -%>">
+  <span class='title'>
+    <%= mailing_template.slug %>
+    <span class="preview">&nbsp;</span>
+  </span>
+  <span class='actions'>
+    <%= link_to refinery_icon_tag("application_edit.png"), edit_admin_mailing_template_path(mailing_template),
+         :title => t('.edit') %>
+    <%= link_to refinery_icon_tag("delete.png"), admin_mailing_template_path(mailing_template),
+        :class => "cancel confirm-delete",
+        :title => t('.delete'),
+        :confirm => t('message', :scope => 'shared.admin.delete', :title => mailing_template.slug),
+        :method => :delete %>
+  </span>
+</li>

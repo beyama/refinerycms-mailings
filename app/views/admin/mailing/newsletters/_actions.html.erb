@@ -1,0 +1,26 @@
+<ul>
+  <% if Admin::Mailing::NewslettersController.searchable? %>
+    <li>
+      <%= render :partial => "/shared/admin/search",
+                  :locals => {
+                    :url => admin_mailing_newsletters_url
+                  } %>
+    </li>
+  <% end %>
+<% if !searching? and Admin::Mailing::NewslettersController.sortable? and MailingNewsletter.count > 1 %>
+  <li>
+    <%= link_to t('.reorder', :what => "Newsletters"),
+                 admin_mailing_newsletters_url,
+                 :id => "reorder_action",
+                 :class => "reorder_icon" %>
+
+    <%= link_to t('.reorder_done', :what => "Newsletters"),
+                 admin_mailing_newsletters_url,
+                 :id => "reorder_action_done",
+                 :style => "display: none;",
+                 :class => "reorder_icon" %>
+  </li>
+<% end %>
+</ul>
+
+<%= render '/admin/mailing/sidebar' %>

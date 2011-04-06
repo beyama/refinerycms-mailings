@@ -1,0 +1,51 @@
+<%= form_for [:admin, @mailing] do |f| -%>
+  <%= render :partial => "/shared/admin/error_messages", :locals => {
+          :object => @mailing,
+          :include_object_name => true
+        } %>
+  
+  <div class='field'>
+    <%= f.label :subject -%>
+    <%= f.text_field :subject, :class => 'larger widest' -%>
+  </div>
+	
+	<div class='field'>
+    <%= f.label :template -%>
+    <%= f.select :template, mailing_templates.map {|t| [t, t]} -%>
+  </div>
+  
+  <div class='field'>
+    <div id='page-tabs' class='clearfix ui-tabs ui-widget ui-widget-content ui-corner-all'>
+      <ul id='page_parts'>
+        <% [:body, :html_body].each_with_index do |part, part_index| %>
+          <li class='ui-state-default<%= ' ui-state-active' if part_index == 0 %>'>
+            <%= link_to part.to_s.titleize, "##{part}" %>
+          </li>
+        <% end %>
+      </ul>
+
+      <div id='page_part_editors'>
+      	<div class='page_part' id='body'>
+          <%= f.text_area :body, :rows => 20, :class => 'widest' -%>
+        </div>
+				<div class='page_part' id='html_body'>
+          <%= f.text_area :html_body, :rows => 20, :class => 'wymeditor widest' -%>
+        </div>
+      </div>
+    </div>
+  
+  <%= render :partial => "/shared/admin/form_actions",
+              :locals => {
+                :f => f,
+                :continue_editing => false,
+                :delete_title => t('delete', :scope => 'admin.mailings.mailing'),
+                :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @mailing.subject)
+              } %>
+<% end -%>
+<% content_for :javascripts do %>
+  <script>
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });
+  </script>
+<% end %>

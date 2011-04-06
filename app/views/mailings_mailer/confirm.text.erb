@@ -1,0 +1,17 @@
+Willkommen <%= @subscriber.email %>,
+
+durch das folgen des Links:
+
+<%= approve_newsletter_url(:id => @token) %>
+
+werden Sie als Abonnement folgender Newsletter eingetragen:
+
+<% @subscriptions.each do |sub| -%>
+  <%= sub.newsletter.name %>
+<% end -%>
+
+Sollten Sie kein Interesse mehr an den Abonnements haben oder
+durch einen dritten bei uns eingetragen worden sein,
+so ignorieren Sie diese Mail einfach.
+
+Mit freundlichen Grüßen

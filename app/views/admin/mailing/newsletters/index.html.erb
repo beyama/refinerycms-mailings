@@ -1,0 +1,13 @@
+<% content_for :stylesheets, stylesheet_link_tag('refinery/refinerycms-mailings') %>
+<% content_for :javascripts, javascript_include_tag('refinery/refinerycms-mailings') %>
+
+<section id='records'>
+  <%= render :partial => 'records' %>
+</section>
+<aside id='actions'>
+  <%= render :partial => 'actions' %>
+</aside>
+<%= render :partial => '/shared/admin/make_sortable',
+            :locals => {
+              :tree => false
+            } if !searching? and Admin::Mailing::NewslettersController.sortable? and MailingNewsletter.count > 1 %>

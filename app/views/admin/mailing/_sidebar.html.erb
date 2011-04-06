@@ -1,0 +1,44 @@
+<ul id="mailings_navigation">
+	<li class="collapsible_menu">
+		<a href="#" class="email_icon"><%= t('.mailings') %></a>
+		<ul class="submenu">
+			<li>
+        <%= link_to t('.list_mailings'), admin_mailings_url,
+              :class => "email_go_icon" %>
+			</li>
+			<li>
+        <%= link_to t('.create_new_mailing'), new_admin_mailing_url,
+              :class => "email_add_icon" %>
+			</li>
+		</ul>
+	</li>
+
+  <li class="collapsible_menu">
+    <a href="#" class="newspaper_icon"><%= t('.newsletter') %></a>
+    <ul class="submenu">
+      <li>
+        <%= link_to t('.list_newsletter'), admin_mailing_newsletters_url,
+              :class => "newspaper_go_icon" %>
+      </li>
+      <li>
+        <%= link_to t('.create_new_newsletter'), new_admin_mailing_newsletter_url,
+              :class => "newspaper_add_icon" %>
+      </li>
+    </ul>
+  </li>
+	
+	<li class="collapsible_menu">
+		<a href="#" class="layers_icon"><%= t('.templates') %></a>
+		<ul class="submenu">
+			<li>
+        <%= link_to t('.list_templates'), admin_mailing_templates_url,
+              :class => "layout_icon" %>
+      </li>
+      <li>
+        <%= link_to t('.create_new_template'), new_admin_mailing_template_url,
+              :class => "layout_add_icon" %>
+      </li>
+		</ul>
+	</li>
+	
+</ul>

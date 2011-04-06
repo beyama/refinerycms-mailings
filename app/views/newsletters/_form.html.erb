@@ -1,0 +1,37 @@
+<% selected = params[:newsletter] || [] %>
+<%= form_tag newsletter_url, :method => :post do %>
+  <%= render :partial => "/shared/admin/error_messages", :locals => {
+          :object => @subscriber,
+          :include_object_name => true
+        } %>
+  <% if @newsletters.empty? %>
+	  <p><%= t('.sorry_no_results') %></p>
+	<% else %>
+	  <% if @newsletters.size == 1 %>
+		  <% newsletter = @newsletters.first %>
+		  <%= hidden_field_tag "newsletter[]", newsletter.id, :id => dom_id(newsletter) %>
+			<h2><%= newsletter.name %></h2>
+			<%=raw newsletter.description  %>
+		<% else %>
+		  <table>
+		  	<tbody>
+		  		<% @newsletters.each do |newsletter| %>
+						<tr>
+		          <td>
+								<%= check_box_tag "newsletter[]", newsletter.id, selected.include?(newsletter.id.to_s), :id => dom_id(newsletter) %>
+							</td>
+		          <td>
+		            <h2><%= newsletter.name %></h2>
+		            <%=raw newsletter.description  %>
+		          </td>
+		        </tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% end %>
+		<%= label_tag 'email', t('.email'), %>
+		<%= email_field_tag 'email', @subscriber.email %>
+		<%= submit_tag t('.subscribe') %>
+		<%= submit_tag t('.unsubscribe'), :name => 'unsubscribe' %>
+  <% end %>
+<% end %>

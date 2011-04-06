@@ -1,0 +1,79 @@
+de:
+  shared:
+    admin:
+      image_picker:
+        image: image
+  plugins:
+    mailings:
+      title: Mailings
+  admin:
+    mailings:
+      actions:
+        create_new: Neues Mailing anlegen
+      records:
+        title: Mailings
+        sorry_no_results: Tut mir leid, Suche brachte keine Ergebnisse.
+        no_items_yet: Es sind noch keine Mailings angelegt. Klick "Neues Mailing anlegen" um dein erstes Mailing hinzuzufügen.
+      mailing:
+        edit: Bearbeite dieses Mailing
+        delete: Lösche dieses Mailing für immer
+  
+    mailing:
+      sidebar:
+        mailings: Mailings
+        list_mailings: Mailings verwalten
+        create_new_mailing: Neues Mailing anlegen
+        newsletter: Newsletter
+        list_newsletter: Newsletter verwalten
+        create_new_newsletter: Neuen Newsletter anlegen
+        templates: Vorlagen
+        list_templates: Vorlagen auflisten
+        create_new_template: Neue Vorlage anlegen 
+              
+      newsletters:
+        actions:
+          create_new: Neuen Newsletter anlegen
+          reorder: Newsletters neu ordnen
+          reorder_done: Neuordnung der Newsletters ist fertig
+        records:
+          title: Newsletters
+          sorry_no_results: Tut mir leid, Suche brachte keine Ergebnisse.
+          no_items_yet: Es sind noch keine Newsletter angelegt. Klick "Neuen Newsletter anlegen" um deinen ersten Newsletter hinzuzufügen.
+        newsletter:
+          edit: Bearbeite diesen Newsletter
+          delete: Lösche diesen Newsletter für immer
+          
+      mailing_templates:
+        actions:
+          create_new: Neue Vorlage anlegen
+        records:
+          title: Vorlagen
+          sorry_no_results: Tut mir leid, Suche brachte keine Ergebnisse.
+          no_items_yet: Es sind noch keine Vorlagen angelegt. Klick "Neue Vorlage anlegen" um deine erste Vorlage hinzuzufügen.
+        mailing_template:
+          edit: Bearbeite diese Vorlage
+          delete: Lösche diese Vorlage für immer
+        
+      subscribers:
+        actions:
+          create_new: Add New Subscriber
+          reorder: Reorder Subscribers
+          reorder_done: Done Reordering Subscribers
+        records:
+          title: Subscribers
+          sorry_no_results: Sorry! There are no results found.
+          no_items_yet: There are no Subscribers yet. Click "Add New Subscriber" to add your first subscriber.
+        subscriber:
+          view_live_html: View this subscriber live <br/><em>(opens in a new window)</em>
+          edit: Edit this subscriber
+          delete: Remove this subscriber forever
+      
+  newsletters:
+    show:
+      confirmation_mail_send: Eine Bestätigungsmail wurde an '%{to}' versendet. Bitte folgen Sie dem Bestätigungslink in der Mail, um ihr Abonnement frei zu schalten.
+      successfully_unsubscribed: Sie wurden aus den gewählten Newslettern ausgetragen.
+    form:
+      subscribe: Abonnieren
+      unsubscribe: Abbestellen
+      email: Email
+      sorry_no_results: Tut mir leid, Suche brachte keine Ergebnisse.

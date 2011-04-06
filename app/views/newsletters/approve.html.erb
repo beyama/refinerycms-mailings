@@ -1,0 +1,24 @@
+<% content_for :body_content_left do %>
+
+	<% unless request.post? %>
+		<%= form_tag approve_newsletter_url(:id => params[:id]), :method => :post do %>
+		  <h2><%= t('.subscribe_headline') %></h2>
+			<ul>
+				<% @subscriptions.each do |sub| %>
+				 <li><%= sub.newsletter.name %></li>
+				<% end %>
+			</ul>
+			<%= submit_tag t('.subscribe') %>
+		<% end %>
+	<% else %>
+	  <h2><%= t('.successfully_subscribed_headline') %></h2>
+	  <ul>
+	    <% @subscriptions.each do |sub| %>
+	      <li><%= sub.newsletter.name %></li>
+	    <% end %>
+	  </ul>
+	<% end %>
+
+<% end %>
+
+<%= render :partial => "/shared/content_page" %>

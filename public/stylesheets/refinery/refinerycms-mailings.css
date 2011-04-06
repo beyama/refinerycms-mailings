@@ -1,0 +1,30 @@
+li.collapsible_menu {
+	position: relative;
+}
+li.collapsible_menu ul.submenu {
+	margin: 0 auto !important;
+	width: 93%;
+}
+li.collapsible_menu span.arrow {
+  background-repeat: no-repeat;
+  cursor: pointer;
+  height: 7px;
+  position: absolute;
+  right: 10px;
+  top: 13px;
+  width: 11px;
+	background-image: url("../../images/refinerycms-mailing/icons/up.gif");
+}
+li.collapsible_menu.closed span.arrow {
+  background-image: url("../../images/refinerycms-mailing/icons/down.gif");
+}
+
+.email_icon { background: url("../../images/refinerycms-mailing/icons/email.png"); }
+.email_add_icon { background: url("../../images/refinerycms-mailing/icons/email_add.png"); }
+.email_go_icon { background: url("../../images/refinerycms-mailing/icons/email_go.png"); }
+.layers_icon { background: url("../../images/refinerycms-mailing/icons/layers.png"); }
+.layout_icon { background: url("../../images/refinerycms-mailing/icons/layout.png"); }
+.layout_add_icon { background: url("../../images/refinerycms-mailing/icons/layout_add.png"); }
+.newspaper_icon { background: url("../../images/refinerycms-mailing/icons/newspaper.png"); }
+.newspaper_add_icon { background: url("../../images/refinerycms-mailing/icons/newspaper_add.png"); }
+.newspaper_go_icon { background: url("../../images/refinerycms-mailing/icons/newspaper_go.png"); }

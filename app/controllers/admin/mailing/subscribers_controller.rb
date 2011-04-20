@@ -5,7 +5,7 @@ class Admin::Mailing::SubscribersController < Admin::BaseController
 
   crudify :mailing_subscriber,
           :include => [:newsletters],
-          :conditions => "#{MailingNewsletterSubscriber.table_name}.verified_at not null",
+          :conditions => "#{MailingNewsletterSubscriber.table_name}.verified_at is not null",
           :title_attribute => 'email', 
           :xhr_paging => true
 

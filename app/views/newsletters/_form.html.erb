@@ -29,7 +29,7 @@
 				</tbody>
 			</table>
 		<% end %>
-		<%= label_tag 'email', t('.email'), %>
+		<%= label_tag 'email', t('.email') %>
 		<%= email_field_tag 'email', @subscriber.email %>
 		<%= submit_tag t('.subscribe') %>
 		<%= submit_tag t('.unsubscribe'), :name => 'unsubscribe' %>

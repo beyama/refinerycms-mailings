@@ -1,0 +1,3 @@
+<% selected_newsletters = @mailing_subscriber.subscriptions.select(&:approved?).map(&:newsletter) %>
+$('#<%= dom_id(@mailing_subscriber, 'preview') %>').replaceWith('<%= escape_javascript(render :partial => 'preview', :locals => {:subscriber => @mailing_subscriber, :selected => selected_newsletters}) %>');
+$('#<%= dom_id(@mailing_subscriber, 'form') %>').replaceWith('<%= escape_javascript(render :partial => 'inline_form', :locals => {:subscriber => @mailing_subscriber, :selected => selected_newsletters}) %>');

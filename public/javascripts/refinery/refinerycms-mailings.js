@@ -26,5 +26,12 @@ $(function() {
 		});
 		
   }
+	var subscribers = $('#subscribers');
+	if(subscribers.length > 0) {
+		$('a.edit', subscribers).live('click', function() {
+			$(this).parent().parent().find('form').toggle();
+			return false;
+		});
+	}
 	
 });

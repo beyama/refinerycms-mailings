@@ -28,3 +28,12 @@ li.collapsible_menu.closed span.arrow {
 .newspaper_icon { background: url("../../images/refinerycms-mailing/icons/newspaper.png"); }
 .newspaper_add_icon { background: url("../../images/refinerycms-mailing/icons/newspaper_add.png"); }
 .newspaper_go_icon { background: url("../../images/refinerycms-mailing/icons/newspaper_go.png"); }
+.subscribers_icon { background: url("../../images/refinerycms-mailing/icons/group.png"); }
+
+#subscribers li.subscriber form { display: none;}
+#subscribers li form h3 { margin: 0; }
+
+#subscribers li form label {
+	display: inline !important;
+	margin-top: 5px;
+}

@@ -15,6 +15,20 @@ page = Page.create(
   :position => ((Page.maximum(:position, :conditions => {:parent_id => nil}) || -1)+1),
   :menu_match => '^/newsletter(\/|\/.+?|)$'
 )
-Page.default_parts.each do |default_page_part|
-  page.parts.create(:title => default_page_part, :body => nil)
+
+approve = Page.create(
+  :title => 'Newsletter',
+  :link_url => '/newsletter/approve',
+  :deletable => false,
+  :parent => page,
+  :show_in_menu => false,
+  :position => ((Page.maximum(:position, :conditions => {:parent_id => nil}) || -1)+1)
+)
+
+[page, approve].each do |p|
+  Page.default_parts.each do |default_page_part|
+    p.parts.create(:title => default_page_part, :body => nil)
+  end
 end
+
+

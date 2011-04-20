@@ -1,0 +1,5 @@
+<span id="<%= dom_id(subscriber, 'preview') -%>" class="preview">
+	<% unless selected.empty? -%>
+    (<%= selected.map(&:name).join(', ') %>)
+	<% end -%>
+</span>

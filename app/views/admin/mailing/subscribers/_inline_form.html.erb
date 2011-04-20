@@ -1,0 +1,12 @@
+<%= form_tag [:admin, subscriber], :id => dom_id(subscriber, 'form'), :method => :put, :remote => true do |f| %>
+  <h3><%= t('.newsletters') %>:</h3>
+  <ul>
+  <% @newsletters.each do |letter| %>
+	  <li class="newsletter">
+      <%= check_box_tag "newsletter[]", letter.id, selected.include?(letter), :id => dom_id(letter) %>
+			<%= label_tag dom_id(letter), letter.name %>
+		</li>
+	<% end %>
+	</ul>
+	<%= submit_tag t('.update'), :class => 'button' %>
+<% end %>

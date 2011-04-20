@@ -1,7 +1,7 @@
 require 'liquid'
 
 class MailingsMailer < ActionMailer::Base
-  default :from => "from@example.com"
+  default :from => RefinerySetting.find_or_set(:mailings_from_email, 'info@example.org')
   
   def confirm(subscriber, token)
     @subscriber = subscriber

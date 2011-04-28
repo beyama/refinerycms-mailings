@@ -3,9 +3,7 @@ require 'spec_helper'
 describe MailingTemplate do
 
   def reset_mailing_template(options = {})
-    @valid_attributes = {
-      :slug => "default.html"
-    }
+    @valid_attributes = { :slug => "default.html" }
 
     @mailing_template.destroy! if @mailing_template
     @mailing_template = MailingTemplate.create!(@valid_attributes.update(options))

@@ -19,6 +19,22 @@ li.collapsible_menu.closed span.arrow {
   background-image: url("../../images/refinerycms-mailing/icons/down.gif");
 }
 
+.field.newsletters ul {
+	float: left;
+	width: 99%;
+	border: 1px solid #7F9DB9;
+	list-style: none;
+	margin: 0;
+	padding: 0.4% 0.5%;
+}
+
+.field.newsletters li { 
+  float: left;
+	margin-right: 12px;
+}
+
+.field.newsletters ul label { display: inline; }
+
 .email_icon { background: url("../../images/refinerycms-mailing/icons/email.png"); }
 .email_add_icon { background: url("../../images/refinerycms-mailing/icons/email_add.png"); }
 .email_go_icon { background: url("../../images/refinerycms-mailing/icons/email_go.png"); }

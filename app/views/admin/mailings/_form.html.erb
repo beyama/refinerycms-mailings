@@ -4,6 +4,23 @@
           :include_object_name => true
         } %>
   
+	<div class="field newsletters clearfix">
+		<%= label_tag t('.to_newsletters') %>
+		
+		<ul>
+			<% nm = NewsletterMailing.new %>
+			<% @newsletters.each_with_index do |letter, i| %>
+			  <li>
+			  	<% nm.newsletter_id = letter.id %>
+			  	<%= f.fields_for :newsletter_mailings, nm do |letter_fields| %>
+						<%= letter_fields.check_box :newsletter_id, { :checked => @mailing.newsletters.include?(letter) }, letter.id %>
+            <%= letter_fields.label :newsletter_id, letter.name %>
+					<% end %>
+			  </li>
+			<% end %>
+		</ul>
+	</div>
+	
   <div class='field'>
     <%= f.label :subject -%>
     <%= f.text_field :subject, :class => 'larger widest' -%>
@@ -33,6 +50,7 @@
         </div>
       </div>
     </div>
+	</div>
   
   <%= render :partial => "/shared/admin/form_actions",
               :locals => {
@@ -42,6 +60,7 @@
                 :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @mailing.subject)
               } %>
 <% end -%>
+
 <% content_for :javascripts do %>
   <script>
     $(document).ready(function(){

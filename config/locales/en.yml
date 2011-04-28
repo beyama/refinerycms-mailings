@@ -20,6 +20,8 @@ en:
         view_live_html: View this mailing live <br/><em>(opens in a new window)</em>
         edit: Edit this mailing
         delete: Remove this mailing forever
+      form:
+        to_newsletters: To newsletters
   
     mailing:
       sidebar:

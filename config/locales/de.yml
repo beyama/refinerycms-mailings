@@ -17,6 +17,8 @@ de:
       mailing:
         edit: Bearbeite dieses Mailing
         delete: Lösche dieses Mailing für immer
+      form:
+        to_newsletters: An Newsletter
   
     mailing:
       sidebar:

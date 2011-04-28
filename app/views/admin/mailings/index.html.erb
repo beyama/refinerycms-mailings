@@ -1,5 +1,7 @@
-<% content_for :stylesheets, stylesheet_link_tag('refinery/refinerycms-mailings') %>
-<% content_for :javascripts, javascript_include_tag('refinery/refinerycms-mailings') %>
+<% 
+  content_for :stylesheets, stylesheet_link_tag('refinery/refinerycms-mailings')
+  content_for :javascripts, javascript_include_tag('refinery/refinerycms-mailings') 
+%>
 
 <section id='records'>
   <%= render :partial => 'records' %>

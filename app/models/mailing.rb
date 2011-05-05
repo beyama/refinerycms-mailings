@@ -1,21 +1,32 @@
 class Mailing < ActiveRecord::Base  
   acts_as_indexed :fields => [:subject, :body, :html_body]
 
-  validates :subject, :presence => true
+  validates :from, :subject, :presence => true
   
-  has_many :recipients, :class_name => 'MailingRecipient'
+  has_and_belongs_to_many :newsletters, :class_name => 'MailingNewsletter', :uniq => true
+  has_and_belongs_to_many :newsletter_recipients, :class_name => 'MailingSubscriber',:join_table => :mailing_subscribers_mailings, :uniq => true
   
-  has_many :newsletter_mailings
-  has_many :newsletters, :through => :newsletter_mailings, :class_name => 'MailingNewsletter'
+  belongs_to :job, :class_name => 'Delayed::Backend::ActiveRecord::Job'
   
-  def newsletter_mailings_attributes=(attrs)
-    ids = attrs.values.inject([]) {|a, attr| a << attr[:newsletter_id].to_i}.reject(&:zero?)
-    self.newsletter_mailings -= self.newsletter_mailings.reject {|n| ids.include?(n.newsletter_id) }
-    associated = self.newsletter_mailings.map(&:newsletter_id)
+  def subscribers
+    MailingSubscriber.
+      joins(:subscriptions => {:newsletter => :mailings}).
+      where('mailing_newsletter_subscribers.verified_at is not null').
+      where(:mailings => {:id => self.id})
+  end
+  
+  def newsletters_attributes=(attrs)
+    ids = attrs.select {|k,v| v[:checked] != '0' }.keys.map(&:to_i)
+    selected = ids.empty? ? ids : MailingNewsletter.find(ids)
     
-    (ids - associated).each do |id|
-      self.newsletter_mailings.build :newsletter_id => id
-    end
+    self.newsletters -= self.newsletters.reject {|n| selected.include?(n) }
+    
+    (selected - self.newsletters).each {|letter| self.newsletters << letter }
+  end
+  
+  def sended?
+    # delayed_job defined Object#send_at (!)
+    !self.read_attribute(:send_at).nil?
   end
   
   def to_liquid

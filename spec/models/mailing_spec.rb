@@ -4,6 +4,7 @@ describe Mailing do
 
   def reset_mailing(options = {})
     @valid_attributes = {
+      :from    => 'noreply@example.org',
       :subject => "New version of refinerycms mailings released"
     }
 

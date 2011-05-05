@@ -5,6 +5,22 @@ module Refinery
   module Mailings
     
     autoload :LiquidFileSystem, 'refinery/mailings/liquid_file_system'
+    autoload :NewsletterJob, 'refinery/mailings/newsletter_job'
+    
+    class << self
+      def confirm_from
+        RefinerySetting.find_or_set(:mailings_confirm_from, 'noreply@example.org')
+      end
+      
+      def from_addresses
+        RefinerySetting.find_or_set(:mailings_from_addresses, ['noreply@example.org'])
+      end
+      
+      def test_addresses
+        RefinerySetting.find_or_set(:mailings_test_addresses, ['test@example.org'])
+      end
+      
+    end
     
     class Engine < Rails::Engine
       initializer "static assets" do |app|

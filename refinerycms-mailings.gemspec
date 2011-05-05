@@ -9,5 +9,6 @@ Gem::Specification.new do |s|
   s.files             = Dir['lib/**/*', 'config/**/*', 'app/**/*']
   
   s.add_dependency    'liquid',  '>= 2.2.2'
+  s.add_dependency    'delayed_job',  '>= 2.1.4'
   s.add_dependency    'guid'
 end

@@ -2,6 +2,7 @@ class CreateMailingStructure < ActiveRecord::Migration
 
   def self.up
     create_table ::Mailing.table_name do |t|
+      t.string   :from, :null => false
       t.string   :subject, :null => false
       t.text     :body
       t.text     :html_body
@@ -10,6 +11,7 @@ class CreateMailingStructure < ActiveRecord::Migration
       t.integer  :updated_by_id
       t.datetime :send_at
       t.datetime :finished_at
+      t.integer  :job_id
       
       t.timestamps 
     end
@@ -58,24 +60,14 @@ class CreateMailingStructure < ActiveRecord::Migration
       t.timestamps
     end
     
-    create_table ::MailingRecipient.table_name do |t|
-      t.string     :to, :null => false
-      t.integer    :status, :default => 0, :null => false
-      t.references :mailing
-      t.datetime   :send_at
-      t.references :receivable, :polymorphic => true
-
-      t.timestamps
+    create_table :mailing_newsletters_mailings, :id => false do |t|
+      t.integer :mailing_newsletter_id
+      t.integer :mailing_id
     end
     
-    add_index ::MailingRecipient.table_name, [:mailing_id, :receivable_id, :receivable_type], 
-      :name => "index_unique_#{::MailingRecipient.table_name}", :unique => true
-    
-    create_table ::NewsletterMailing.table_name do |t|
-      t.references :newsletter
-      t.references :mailing
-
-      t.timestamps
+    create_table :mailing_subscribers_mailings, :id => false do |t|
+      t.integer :mailing_subscriber_id
+      t.integer :mailing_id
     end
     
     load(Rails.root.join('db', 'seeds', 'mailings.rb'))
@@ -91,7 +83,8 @@ class CreateMailingStructure < ActiveRecord::Migration
     drop_table ::MailingTemplate.table_name
     drop_table ::MailingSubscriber.table_name
     drop_table ::MailingNewsletterSubscriber.table_name
-    drop_table ::MailingRecipient.table_name
+    drop_table :mailing_newsletters_mailings
+    drop_table :mailing_subscribers_mailings
   end
 
 end

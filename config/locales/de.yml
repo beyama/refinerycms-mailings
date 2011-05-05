@@ -19,6 +19,11 @@ de:
         delete: Lösche dieses Mailing für immer
       form:
         to_newsletters: An Newsletter
+        save: Speichern
+        save_and_continue: Speichern und weiter
+        send: Mailing senden
+        test: Test Mail senden
+        list_mailings: Zurück
   
     mailing:
       sidebar:
@@ -31,7 +36,7 @@ de:
         templates: Vorlagen
         list_templates: Vorlagen auflisten
         create_new_template: Neue Vorlage anlegen
-        list_subscribers: Manage subscribers
+        list_subscribers: Abonnenten auflisten
               
       newsletters:
         actions:
@@ -65,7 +70,7 @@ de:
         records:
           title: Subscribers
           sorry_no_results: Sorry! There are no results found.
-          no_items_yet: There are no Subscribers yet. Click "Add New Subscriber" to add your first subscriber.
+          no_items_yet: Keine Abonnenten gefunden.
         subscriber:
           view_live_html: View this subscriber live <br/><em>(opens in a new window)</em>
           edit: Edit this subscriber
@@ -87,4 +92,19 @@ de:
       subscribe_headline: Angefragte Abonnements
       successfully_subscribed_headline: Erfolgreich abonniert
       subscribe: Abonnieren
-    
+      
+  activerecord:
+      attributes:
+        mailing:
+          from: "Von"
+          subject: Betreff
+          template: Vorlage
+          body: Text
+          html_body: HTML-Text
+        mailing_template:
+          slug: Name
+          body: Text
+        mailing_newsletter:
+          description: Beschreibung
+          public: Öffentlich
+      

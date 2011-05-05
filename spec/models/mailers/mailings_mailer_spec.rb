@@ -12,6 +12,8 @@ describe MailingsMailer do
         :newsletter => @newsletter, 
         :subscriber => @subscriber,
         :token => @token
+        
+      RefinerySetting.set(:mailings_confirm_from, "from@example.com")
     end
     
     let(:mail) { MailingsMailer.confirm(@subscriber, @token) }
@@ -31,24 +33,25 @@ describe MailingsMailer do
     
     before do
       @mail_attributes = {
+        :from      => 'noreply@example.org',
         :subject   => 'New version of refinerycms mailings released',
         :template  => 'default',
         :body      => 'Hi, a new version of...',
         :html_body => '<h1>Hi, a new version of...</h1>'
       }
       @mailing = Mailing.create!(@mail_attributes)
-      @recipient = @mailing.recipients.create!(:to => "to@example.org")
       
-      MailingTemplate.create!(:slug => 'default.text', :body => '{{mailing.body}}')
+      MailingTemplate.create!(:slug => 'content.text', :body => '{{mailing.body}}')
+      MailingTemplate.create!(:slug => 'default.text', :body => '%{include "content.text"}%')
       MailingTemplate.create!(:slug => 'default.html', :body => '{{mailing.html_body}}')
     end
     
-    let(:mail) { MailingsMailer.send_mail(@mailing, @recipient) }
+    let(:mail) { MailingsMailer.send_mail(@mailing, :to => "to@example.org") }
 
     it "renders the headers" do
-      mail.subject.should eq(@mail_attributes[:subject])
+      mail.subject.should eq(@mailing.subject)
       mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      mail.from.should eq([@mailing.from])
     end
 
     it "renders the body" do

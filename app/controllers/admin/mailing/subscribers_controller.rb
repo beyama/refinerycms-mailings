@@ -5,7 +5,7 @@ class Admin::Mailing::SubscribersController < Admin::BaseController
 
   crudify :mailing_subscriber,
           :include => [:newsletters],
-          :conditions => "#{MailingNewsletterSubscriber.table_name}.verified_at not null",
+          :conditions => "mailing_newsletter_subscribers.verified_at not null",
           :title_attribute => 'email', 
           :xhr_paging => true
 
@@ -30,6 +30,10 @@ class Admin::Mailing::SubscribersController < Admin::BaseController
   end
 
   protected
+  
+  def find_mailing_subscriber
+    @mailing_subscriber = MailingSubscriber.find(params[:id])
+  end
   
   def find_all_newsletters
     @newsletters = MailingNewsletter.all

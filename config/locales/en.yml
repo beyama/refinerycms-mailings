@@ -22,6 +22,11 @@ en:
         delete: Remove this mailing forever
       form:
         to_newsletters: To newsletters
+        save: Save
+        save_and_continue: Save and continue
+        send: Send mailing
+        test: Send test mail
+        list_mailings: Back
   
     mailing:
       sidebar:
@@ -72,7 +77,7 @@ en:
         records:
           title: Subscribers
           sorry_no_results: Sorry! There are no results found.
-          no_items_yet: There are no Subscribers yet. Click "Add New Subscriber" to add your first subscriber.
+          no_items_yet: There are no Subscribers yet.
         subscriber:
           view_live_html: View this subscriber live <br/><em>(opens in a new window)</em>
           edit: Edit this subscriber
@@ -90,3 +95,11 @@ en:
       subscribe_headline: Requested Subscriptions
       successfully_subscribed_headline: Successfully subscribed
       subscribe: Abonnieren
+
+  activerecord:
+      attributes:
+        mailing:
+          body: Text
+          html_body: HTML-Text
+        mailing_template:
+          slug: Name

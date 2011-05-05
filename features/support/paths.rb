@@ -18,7 +18,7 @@ module NavigationHelpers
         when /the new mailing_template form/
           new_admin_mailing_template_path
         when /the list of subscribers/
-          admin_subscribers_path
+          admin_mailing_subscribers_path
         when /the new subscriber form/
           new_admin_mailing_subscriber_path
         else

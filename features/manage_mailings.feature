@@ -7,6 +7,7 @@ Feature: Mailings
   Background:
     Given I am a logged in refinery user
     And I have no mailings
+    And I have a default sender
 
   @mailings-list @list
   Scenario: Mailings List

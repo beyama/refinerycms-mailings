@@ -2,10 +2,14 @@ Given /^I have no subscribers$/ do
   MailingSubscriber.delete_all
 end
 
-Given /^I (only )?have subscribers titled "?([^\"]*)"?$/ do |only, titles|
-  Subscriber.delete_all if only
-  titles.split(', ').each do |title|
-    Subscriber.create(:email => title)
+Given /^I (only )?have subscribers with email addresses "?([^\"]*)"?$/ do |only, addresses|
+  MailingSubscriber.delete_all if only
+  newsletter = MailingNewsletter.first
+  addresses.split(', ').each do |address|
+    sub = MailingSubscriber.create(:email => address)
+    if newsletter
+      sub.subscriptions.create :newsletter => newsletter, :verified_at => Time.now
+    end
   end
 end
 

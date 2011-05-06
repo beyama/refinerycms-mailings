@@ -55,7 +55,7 @@ en:
           edit: Edit this newsletter
           delete: Remove this newsletter forever
           
-      mailing_templates:
+      templates:
         actions:
           create_new: Add New Mailing Template
           reorder: Reorder Mailing Templates

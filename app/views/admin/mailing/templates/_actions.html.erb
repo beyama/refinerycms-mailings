@@ -1,12 +1,10 @@
 <ul>
-  <% if Admin::Mailing::MailingTemplatesController.searchable? %>
     <li>
       <%= render :partial => "/shared/admin/search",
                   :locals => {
                     :url => admin_mailing_templates_url
                   } %>
     </li>
-  <% end %>
 </ul>
 
 <%= render '/admin/mailing/sidebar' %>

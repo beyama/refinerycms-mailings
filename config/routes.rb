@@ -11,7 +11,7 @@ Refinery::Application.routes.draw do
     end
     
     scope(:path => 'mailing', :as => 'mailing', :module => 'mailing') do
-      resources :templates, :controller => 'mailing_templates', :except => :show
+      resources :templates, :except => :show
       
       resources :subscribers, :except => [:new, :show, :edit]
       

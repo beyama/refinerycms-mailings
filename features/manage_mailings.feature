@@ -18,9 +18,13 @@ Feature: Mailings
 
   @mailings-valid @valid
   Scenario: Create Valid Mailing
+    Given I only have newsletters titled News
     When I go to the list of mailings
     And I follow "Create new mailing"
+    And I check "News"
     And I fill in "Subject" with "This is my subject"
+#    And I fill in "Text" with "This is plain text"
+#    And I fill in "HTML-Text" with "<h1>This is html text</h1>"
     And I press "Save"
     Then I should see "'This is my subject' was successfully added."
     And I should have 1 mailing

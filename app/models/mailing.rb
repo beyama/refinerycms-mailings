@@ -16,7 +16,7 @@ class Mailing < ActiveRecord::Base
   end
   
   def newsletters_attributes=(attrs)
-    ids = attrs.select {|k,v| v[:checked] != '0' }.keys.map(&:to_i)
+    ids = Hash[ attrs.select {|k,v| v[:checked] != '0' } ].keys.map(&:to_i) # ruby 1.8 Hash#select returns Array instead of Hash
     selected = ids.empty? ? ids : MailingNewsletter.find(ids)
     
     self.newsletters -= self.newsletters.reject {|n| selected.include?(n) }

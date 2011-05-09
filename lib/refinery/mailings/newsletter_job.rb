@@ -19,4 +19,8 @@ class Refinery::Mailings::NewsletterJob < Struct.new :mailing_id, :options
     end
   end
   
+  def after
+    mailing.update_attribute :finished_at, Time.now
+  end
+  
 end

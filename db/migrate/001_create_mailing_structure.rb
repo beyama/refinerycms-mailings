@@ -9,7 +9,7 @@ class CreateMailingStructure < ActiveRecord::Migration
       t.string   :template
       t.integer  :created_by_id
       t.integer  :updated_by_id
-      t.datetime :send_at
+      t.datetime :sent_at
       t.datetime :finished_at
       t.integer  :job_id
       

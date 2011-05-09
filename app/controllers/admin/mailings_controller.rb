@@ -6,7 +6,7 @@ class Admin::MailingsController < Admin::BaseController
           :order => 'created_at DESC'
           
   before_filter :find_all_newsletters, :only => [:new, :edit, :create, :update]
-  before_filter :change_only_unsended_mailings, :only => :update
+  before_filter :change_only_unsent_mailings, :only => :update
   
   def create
     save ? continue_or_redirect : render(:action => 'new')
@@ -29,7 +29,7 @@ class Admin::MailingsController < Admin::BaseController
         flash.notice = t('mailings.mailing.test_mail_sended', :what => "'#{@mailing.subject}'")
       elsif params[:send]
         job = Delayed::Job.enqueue Refinery::Mailings::NewsletterJob.new(@mailing.id)
-        @mailing.update_attribute :job_id, job.id
+        @mailing.update_attributes :job_id => job.id, :sent_at => Time.now
       else
         msg = new_record ? 'refinery.crudify.created' : 'refinery.crudify.updated'
         flash.notice = t(msg, :what => "'#{@mailing.subject}'")
@@ -48,8 +48,8 @@ class Admin::MailingsController < Admin::BaseController
     @newsletters = MailingNewsletter.all
   end
   
-  def change_only_unsended_mailings
-    if @mailing.sended?
+  def change_only_unsent_mailings
+    if @mailing.sent?
       redirect_to admin_mailings_url
     end
   end

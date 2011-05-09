@@ -1,27 +1,21 @@
 en:
-  shared:
-    admin:
-      image_picker:
-        image: image
   plugins:
     mailings:
       title: Mailings
   admin:
     mailings:
-      actions:
-        create_new: Add New Mailing
-        reorder: Reorder Mailings
-        reorder_done: Done Reordering Mailings
       records:
         title: Mailings
         sorry_no_results: Sorry! There are no results found.
         no_items_yet: There are no Mailings yet. Click "Add New Mailing" to add your first mailing.
       mailing:
-        view_live_html: View this mailing live <br/><em>(opens in a new window)</em>
         edit: Edit this mailing
         delete: Remove this mailing forever
+        sent_at: Sent at %{time}
+        finished_at: Finished at %{time}
       form:
         to_newsletters: To newsletters
+        no_newsletters: There are no newsletters.
         save: Save
         save_and_continue: Save and continue
         send: Send mailing

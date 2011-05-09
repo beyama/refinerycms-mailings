@@ -1,15 +1,9 @@
 de:
-  shared:
-    admin:
-      image_picker:
-        image: image
   plugins:
     mailings:
       title: Mailings
   admin:
     mailings:
-      actions:
-        create_new: Neues Mailing anlegen
       records:
         title: Mailings
         sorry_no_results: Tut mir leid, Suche brachte keine Ergebnisse.
@@ -17,8 +11,11 @@ de:
       mailing:
         edit: Bearbeite dieses Mailing
         delete: Lösche dieses Mailing für immer
+        sent_at: Gesendet am %{time}
+        finished_at: Fertig at %{time}
       form:
         to_newsletters: An Newsletter
+        no_newsletters: Es sind keine Newsletter vorhanden.
         save: Speichern
         save_and_continue: Speichern und weiter
         send: Mailing senden

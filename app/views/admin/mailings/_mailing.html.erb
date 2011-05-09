@@ -1,7 +1,14 @@
 <li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(mailing) -%>">
   <span class='title'>
     <%= mailing.subject %>
-    <span class="preview">&nbsp;</span>
+    <span class="preview">
+      <% if mailing.sent? -%>
+        <%= t('.sent_at', :time => l(mailing.sent_at, :format => :short)) -%>
+      <% end -%>
+      <% if mailing.finished? -%>
+        , <%= t('.finished_at', :time => l(mailing.sent_at, :format => :short)) -%>
+      <% end -%>
+    </span>
   </span>
   <span class='actions'>
     <%= link_to refinery_icon_tag("application_edit.png"), edit_admin_mailing_path(mailing),

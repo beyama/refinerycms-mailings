@@ -6,7 +6,7 @@
   
 	<div class="field">
     <%= f.label :from %>
-    <%= f.collection_select :from, Refinery::Mailings.from_addresses, :to_s, :to_s, {}, :disabled => @mailing.sended? %>
+    <%= f.collection_select :from, Refinery::Mailings.from_addresses, :to_s, :to_s, {}, :disabled => @mailing.sent? %>
   </div>
 	
 	<div class="field newsletters clearfix">
@@ -16,21 +16,24 @@
 			<% @newsletters.each do |letter| %>
 			  <li>
 			  	<% key = "mailing[newsletters_attributes][#{letter.id}]" %>
-				  <%= check_box key, 'checked', {:checked => @mailing.newsletters.include?(letter), :disabled => @mailing.sended?} %>
+				  <%= check_box key, 'checked', {:checked => @mailing.newsletters.include?(letter), :disabled => @mailing.sent?} %>
           <%= label key, 'checked', letter.name %>
 			  </li>
 			<% end %>
+      <% if @newsletters.empty? %>
+        <strong><%= t('.no_newsletters') %></strong>
+      <% end %>
 		</ul>
 	</div>
 	
   <div class='field'>
     <%= f.label :subject -%>
-    <%= f.text_field :subject, :class => 'larger widest', :disabled => @mailing.sended? -%>
+    <%= f.text_field :subject, :class => 'larger widest', :disabled => @mailing.sent? -%>
   </div>
 	
 	<div class='field'>
     <%= f.label :template -%>
-    <%= f.select :template, mailing_templates.map {|t| [t, t]}, {}, :disabled => @mailing.sended? -%>
+    <%= f.select :template, mailing_templates.map {|t| [t, t]}, {}, :disabled => @mailing.sent? -%>
   </div>
   
   <div class='field'>
@@ -45,10 +48,10 @@
 
       <div id='page_part_editors'>
       	<div class='page_part' id='body'>
-          <%= f.text_area :body, :rows => 20, :class => 'widest', :disabled => @mailing.sended? -%>
+          <%= f.text_area :body, :rows => 20, :class => 'widest', :disabled => @mailing.sent? -%>
         </div>
 				<div class='page_part' id='html_body'>
-          <%= f.text_area :html_body, :rows => 20, :class => 'wymeditor widest', :disabled => @mailing.sended? -%>
+          <%= f.text_area :html_body, :rows => 20, :class => 'wymeditor widest', :disabled => @mailing.sent? -%>
         </div>
       </div>
     </div>
@@ -56,7 +59,7 @@
   
 	<div class="form-actions">
 		<div class="form-actions-left">
-	    <% unless @mailing.sended? %>
+	    <% unless @mailing.sent? %>
 				<%= submit_tag t('.save'), :class => "wymupdate button" %>
 				<%= submit_tag t('.save_and_continue'), :name => 'continue', :class => "wymupdate button" %>
 				<%= submit_tag t('.send'), :name => 'send', :class => "wymupdate button" %>
@@ -66,7 +69,7 @@
 	  </div>
 
 		<div class="form-actions-right">
-			<% unless @mailing.sended? %>
+			<% unless @mailing.sent? %>
 				<%= select_tag "test_email", options_from_collection_for_select(Refinery::Mailings.test_addresses, :to_s, :to_s)%>
 				<%= submit_tag t('.test'), :name => 'test', :class => "wymupdate button" %>
 			<% end %>

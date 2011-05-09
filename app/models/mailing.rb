@@ -24,9 +24,12 @@ class Mailing < ActiveRecord::Base
     (selected - self.newsletters).each {|letter| self.newsletters << letter }
   end
   
-  def sended?
-    # delayed_job defined Object#send_at (!)
-    !self.read_attribute(:send_at).nil?
+  def sent?
+    !self.sent_at.nil?
+  end
+  
+  def finished?
+    !self.finished_at.nil?
   end
   
   def to_liquid

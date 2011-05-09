@@ -41,8 +41,10 @@ describe MailingsMailer do
       }
       @mailing = Mailing.create!(@mail_attributes)
       
+      MailingTemplate.create!(:slug => 'footer.text', :body => '{{unsubscribe_url}}')
       MailingTemplate.create!(:slug => 'content.text', :body => '{{mailing.body}}')
-      MailingTemplate.create!(:slug => 'default.text', :body => '%{include "content.text"}%')
+      
+      MailingTemplate.create!(:slug => 'default.text', :body => "{% include 'content.text' %}\n{% include 'footer.text' %}")
       MailingTemplate.create!(:slug => 'default.html', :body => '{{mailing.html_body}}')
     end
     
@@ -55,7 +57,9 @@ describe MailingsMailer do
     end
 
     it "renders the body" do
-      mail.body.encoded.should match(@mail_attributes[:body])
+      body = mail.body.encoded
+      body.should match(@mail_attributes[:body])
+      body.should match("http://127.0.0.1:3000/newsletter")
     end
   end
 

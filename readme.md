@@ -8,3 +8,8 @@
     
     # Sign up for a http://rubygems.org/ account and publish the gem
     gem push refinerycms-mailings.gem
+
+# TODO:
+  * default host for mailing
+  * default host for url_for
+  * delayed_job integration

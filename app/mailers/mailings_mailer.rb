@@ -19,6 +19,8 @@ class MailingsMailer < ActionMailer::Base
     
     data = options.delete(:data)
     
+    unsubscribe_url =  url_for(:controller => :pages, :action => :show, :path => "newsletter")
+    
     if mailing.template.blank?
       mail(options) do |format|
         format.text { render :text => mailing.body }
@@ -31,7 +33,7 @@ class MailingsMailer < ActionMailer::Base
           
           format.send(t.extname) do
             liquid = Liquid::Template.parse(t.body)
-            render :text => liquid.render('mailing' => mailing, 'data' => data)
+            render :text => liquid.render('mailing' => mailing, 'data' => data, 'unsubscribe_url' => unsubscribe_url)
           end
           
         end

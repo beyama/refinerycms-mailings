@@ -13,6 +13,8 @@ en:
         delete: Remove this mailing forever
         sent_at: Sent at %{time}
         finished_at: Finished at %{time}
+        mail_sent: Mail sent
+        test_mail_sent: Test mail sent
       form:
         to_newsletters: To newsletters
         no_newsletters: There are no newsletters.

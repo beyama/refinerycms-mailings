@@ -13,6 +13,8 @@ de:
         delete: Lösche dieses Mailing für immer
         sent_at: Gesendet am %{time}
         finished_at: Fertig at %{time}
+        mail_sent: Mail gesendet
+        test_mail_sent: Test Mail gesendet
       form:
         to_newsletters: An Newsletter
         no_newsletters: Es sind keine Newsletter vorhanden.

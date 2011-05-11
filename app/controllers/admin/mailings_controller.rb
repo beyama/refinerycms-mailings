@@ -29,10 +29,11 @@ class Admin::MailingsController < Admin::BaseController
     if @mailing.save
       if params[:test]
         MailingsMailer.send_mail(@mailing, :to => params[:test_email]).deliver
-        flash.notice = t('mailings.mailing.test_mail_sended', :what => "'#{@mailing.subject}'")
+        flash.notice = t('admin.mailings.mailing.test_mail_sent', :what => "'#{@mailing.subject}'")
       elsif params[:send]
         job = Delayed::Job.enqueue Refinery::Mailings::NewsletterJob.new(@mailing.id)
         @mailing.update_attributes :job_id => job.id, :sent_at => Time.now
+        flash.notice = t('admin.mailings.mailing.mail_sent', :what => "'#{@mailing.subject}'")
       else
         msg = new_record ? 'refinery.crudify.created' : 'refinery.crudify.updated'
         flash.notice = t(msg, :what => "'#{@mailing.subject}'")

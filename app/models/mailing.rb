@@ -3,6 +3,9 @@ class Mailing < ActiveRecord::Base
 
   validates :from, :subject, :presence => true
   
+  belongs_to :created_by, :class_name => 'User'
+  belongs_to :updated_by, :class_name => 'User'
+  
   has_and_belongs_to_many :newsletters, :class_name => 'MailingNewsletter', :uniq => true
   has_and_belongs_to_many :newsletter_recipients, :class_name => 'MailingSubscriber',:join_table => :mailing_subscribers_mailings, :uniq => true
   

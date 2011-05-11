@@ -23,6 +23,9 @@ class Admin::MailingsController < Admin::BaseController
     
     new_record = @mailing.new_record?
     
+    @mailing.created_by = current_user if new_record
+    @mailing.updated_by = current_user
+    
     if @mailing.save
       if params[:test]
         MailingsMailer.send_mail(@mailing, :to => params[:test_email]).deliver

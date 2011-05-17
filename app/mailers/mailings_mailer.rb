@@ -33,6 +33,7 @@ class MailingsMailer < ActionMailer::Base
           next unless template = templates.find{|t| t.extname == ext }
 
           content = ext == 'text' ? mailing.body : mailing.html_body
+          next if content.blank?
           
           format.send(ext) do
             liquid = Liquid::Template.parse(template.body)

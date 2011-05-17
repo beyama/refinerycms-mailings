@@ -20,6 +20,10 @@ module Refinery
         RefinerySetting.find_or_set(:mailings_test_addresses, ['test@example.org'])
       end
       
+      def asset_url
+        RefinerySetting.find_or_set(:mailings_asset_url, 'http://example.org')
+      end
+      
     end
     
     class Engine < Rails::Engine

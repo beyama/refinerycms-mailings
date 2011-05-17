@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 class Mailing < ActiveRecord::Base  
   acts_as_indexed :fields => [:subject, :body, :html_body]
 
@@ -10,6 +12,8 @@ class Mailing < ActiveRecord::Base
   has_and_belongs_to_many :newsletter_recipients, :class_name => 'MailingSubscriber',:join_table => :mailing_subscribers_mailings, :uniq => true
   
   belongs_to :job, :class_name => 'Delayed::Backend::ActiveRecord::Job'
+  
+  before_save :make_urls_absoulute
   
   def subscribers
     MailingSubscriber.
@@ -43,6 +47,22 @@ class Mailing < ActiveRecord::Base
       'created_at' => self.created_at,
       'updated_at' => self.updated_at
     }
+  end
+  
+  protected
+  def fix_url(url)
+    return url if url.blank?
+    @asset_url ||= Refinery::Mailings.asset_url
+    url !~ /^https?:\/\// ? File.join(@asset_url, url) : url
+  end
+  
+  def make_urls_absoulute
+    if !self.html_body.blank? && self.html_body_changed?
+      doc = Nokogiri::HTML(self.html_body)
+      doc.xpath("//a").each {|n| n['href'] = fix_url(n['href']) }
+      doc.xpath("//img").each {|n| n['src'] = fix_url(n['src']) }
+      self.html_body = doc.root.children.first.children.to_s # /html/body/...
+    end
   end
   
 end

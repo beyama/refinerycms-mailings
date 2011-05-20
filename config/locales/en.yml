@@ -23,8 +23,14 @@ en:
         send: Send mailing
         test: Send test mail
         list_mailings: Back
+        loading_preview: Loading preview ...
+        preview_text: Preview text
+        preview_html: Preview HTML
   
     mailing:
+      preview:
+        no_text: No text to preview.
+      
       sidebar:
         mailings: Mailings
         list_mailings: Manage mailings

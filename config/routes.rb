@@ -4,7 +4,10 @@ Refinery::Application.routes.draw do
   end
 
   scope(:path => 'refinery', :as => 'admin', :module => 'admin') do
-    resources :mailings, :except => :show
+    resources :mailings, :except => :show do
+      post 'preview', :on => :member
+      post 'preview', :on => :collection
+    end
     
     scope(:path => 'mailing', :as => 'mailing') do
       root :to => 'mailings#index'

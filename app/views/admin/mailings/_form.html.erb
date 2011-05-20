@@ -1,4 +1,4 @@
-<%= form_for [:admin, @mailing] do |f| -%>
+<%= form_for [:admin, @mailing], :html => {:id => 'mailing_form'} do |f| -%>
   <%= render :partial => "/shared/admin/error_messages", :locals => {
           :object => @mailing,
           :include_object_name => true
@@ -39,23 +39,70 @@
   <div class='field'>
     <div id='page-tabs' class='clearfix ui-tabs ui-widget ui-widget-content ui-corner-all'>
       <ul id='page_parts'>
-        <% [:body, :html_body].each_with_index do |part, part_index| %>
-          <li class='ui-state-default<%= ' ui-state-active' if part_index == 0 %>'>
-            <%= link_to Mailing.human_attribute_name(part), "##{part}" %>
-          </li>
-        <% end %>
+        <li class='ui-state-default ui-state-active'>
+          <%= link_to Mailing.human_attribute_name(:body), "#body" %>
+        </li>
+
+        <li class='ui-state-default'>
+          <%= link_to t('.preview_text'), "#body_preview", :id => 'body_preview_tab' %>
+        </li>
+
+        <li class='ui-state-default'>
+          <%= link_to Mailing.human_attribute_name(:html_body), "#html_body" %>
+        </li>
+
+        <li class='ui-state-default'>
+          <%= link_to t('.preview_html'), "#html_body_preview", :id => 'html_body_preview_tab' %>
+        </li>
       </ul>
 
       <div id='page_part_editors'>
       	<div class='page_part' id='body'>
           <%= f.text_area :body, :rows => 20, :class => 'widest', :disabled => @mailing.sent? -%>
         </div>
-				<div class='page_part' id='html_body'>
+        
+        <div class='page_part' id='body_preview'>
+          <iframe id='body_preview_frame'></iframe>
+        </div>
+				
+        <div class='page_part' id='html_body'>
           <%= f.text_area :html_body, :rows => 20, :class => 'wymeditor widest', :disabled => @mailing.sent? -%>
+        </div>
+        
+        <div class='page_part' id='html_body_preview'>
+          <iframe id='html_body_preview_frame'></iframe>
         </div>
       </div>
     </div>
 	</div>
+
+  <% content_for :javascripts do %>
+    <%= javascript_tag do %>
+      $('#body_preview_tab, #html_body_preview_tab').click(function() {
+        var html = this.id.match(/^html/),
+            payload = $('#mailing_form').serializeArray();
+
+        for(var i in payload) {
+          var e = payload[i];
+          if(e.name == '_method')
+            e.value = 'post';
+          if(e.name == 'mailing[html_body]')
+            e.value = $.wymeditors(0).xhtml()
+        }
+        payload = $.param(payload) + '&format=' + (html ? 'html' : 'text');
+
+        <% preview_path = @mailing.persisted?? preview_admin_mailing_path(@mailing) : preview_admin_mailings_path %>
+
+        iframeId = html ? '#html_body_preview_frame' : '#body_preview_frame';
+
+        $(iframeId).contents().find('html').html("<strong><%= t('.loading_preview') %></strong>");
+
+        $.post('<%= preview_path %>', payload, function(data) {
+          $(iframeId).contents().find('html').html(data);
+        });
+      });
+    <% end %>
+  <% end %>
   
 	<div class="form-actions">
 		<div class="form-actions-left">

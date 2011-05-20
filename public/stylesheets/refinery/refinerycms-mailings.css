@@ -53,3 +53,15 @@ li.collapsible_menu.closed span.arrow {
 	display: inline !important;
 	margin-top: 5px;
 }
+
+#page_part_editors iframe {
+  width: 99%;
+  border: 1px solid #7F9DB9;
+  line-height: 20px;
+  padding: 0.4% 0.5%;
+}
+
+iframe#body_preview_frame, 
+iframe#html_body_preview_frame {
+  height: 400px;
+}

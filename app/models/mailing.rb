@@ -49,13 +49,6 @@ class Mailing < ActiveRecord::Base
     }
   end
   
-  protected
-  def fix_url(url)
-    return url if url.blank?
-    @asset_url ||= Refinery::Mailings.asset_url
-    url !~ /^https?:\/\// ? File.join(@asset_url, url) : url
-  end
-  
   def make_urls_absoulute
     if !self.html_body.blank? && self.html_body_changed?
       doc = Nokogiri::HTML(self.html_body)
@@ -63,6 +56,13 @@ class Mailing < ActiveRecord::Base
       doc.xpath("//img").each {|n| n['src'] = fix_url(n['src']) }
       self.html_body = doc.root.children.first.children.to_s # /html/body/...
     end
+  end
+  
+  protected
+  def fix_url(url)
+    return url if url.blank?
+    @asset_url ||= Refinery::Mailings.asset_url
+    url !~ /^https?:\/\// ? File.join(@asset_url, url) : url
   end
   
 end

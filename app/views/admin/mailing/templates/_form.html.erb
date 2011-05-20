@@ -29,7 +29,7 @@
   <%= render :partial => "/shared/admin/form_actions",
               :locals => {
                 :f => f,
-                :continue_editing => false,
+                :continue_editing => true,
                 :delete_title => t('delete', :scope => 'admin.mailing_templates.mailing_template'),
                 :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @mailing_template.slug)
               } %>

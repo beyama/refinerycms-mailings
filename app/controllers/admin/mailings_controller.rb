@@ -15,6 +15,36 @@ class Admin::MailingsController < Admin::BaseController
   def update
     save ? continue_or_redirect : render(:action => 'edit')
   end
+  
+  def preview
+    @mailing = params[:id] ? find_mailing : Mailing.new
+    
+    html = params[:format] == 'html'
+    
+    @mailing.attributes = params[:mailing]
+    @mailing.make_urls_absoulute if html
+    
+    mail = MailingsMailer.send_mail(@mailing, :to => 'preview@example.org')
+    
+    content = if html
+      if mail.multipart?
+        part = mail.parts.find{|part| part.content_type =~ /^text\/html/ }
+        part ? part.body : nil
+      elsif mail.content_type =~ /^text\/html/
+        mail.body.decoded
+      end
+    else
+      body = if mail.multipart?
+        part = mail.parts.find{|part| part.content_type =~ /^text\/plain/ }
+        part ? part.body : nil
+      elsif mail.content_type =~ /^text\/plain/
+        body.decoded
+      end
+      !body.blank? ? "<html><body><pre>#{body}</pre></body></html>" : nil
+    end
+    content = content.blank? ? "<html><body><h1>#{t('admin.mailing.preview.no_text')}</h1></body></html>" : content
+    render :text => content, :layout => false
+  end
 
   protected
   def save

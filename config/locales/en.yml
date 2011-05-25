@@ -91,7 +91,7 @@ en:
     form:
       subscribe: Subscribe
       unsubscribe: Unsubscribe
-      email: Email
+      email: E-Mail
       sorry_no_results: Sorry! There are no newsletters found.
     approve:
       subscribe_headline: Requested Subscriptions

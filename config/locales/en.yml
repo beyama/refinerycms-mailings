@@ -88,6 +88,10 @@ en:
           update: Update
           newsletters: Newsletter
   newsletters:
+    show:
+      confirmation_mail_send: A confirmation mail was sent to '%{to}'.
+      successfully_unsubscribed: TODO
+      no_selection: No newsletter selected.
     form:
       subscribe: Subscribe
       unsubscribe: Unsubscribe

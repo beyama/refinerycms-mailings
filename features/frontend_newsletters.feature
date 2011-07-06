@@ -20,18 +20,27 @@ Feature: Newsletters
   Scenario: Subscribe Newsletters
     When I go to the frontend list of newsletters
     And check newsletters titled Policy, Social
-    And I fill in "Email" with "me@example.org"
+    And I fill in "E-Mail" with "me@example.org"
     And I press "Subscribe"
-    And I should be on the frontend list of newsletters
+    Then I should be on the frontend list of newsletters
     And I should have a subscription confirm mail
     And I should have 1 subscribers
+
+  @newletters-subscribe-invalid
+  Scenario: Subscribe Newsletters without selection
+    When I go to the frontend list of newsletters
+    And I fill in "E-Mail" with "me@example.org"
+    And I press "Subscribe"
+    Then I should be on the frontend list of newsletters
+    And I should have 0 subscribers
+    And I should see "No newsletter selected."
     
   @newletters-unsubscribe
   Scenario: Unsubscribe Newsletters
     Given I am a subscriber of Policy with email address me@example.org
     When I go to the frontend list of newsletters
     And check newsletters titled Policy
-    And I fill in "Email" with "me@example.org"
+    And I fill in "E-Mail" with "me@example.org"
     And I press "Unsubscribe"
     And I should be on the frontend list of newsletters
     And I should have 0 mailing_newsletter_subscriber

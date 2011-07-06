@@ -88,6 +88,7 @@ de:
     show:
       confirmation_mail_send: Eine Bestätigungsmail wurde an '%{to}' versendet. Bitte folgen Sie dem Bestätigungslink in der Mail, um ihr Abonnement frei zu schalten.
       successfully_unsubscribed: Sie wurden aus den gewählten Newslettern ausgetragen.
+      no_selection: Sie haben keinen Newsletter ausgewählt.
     form:
       subscribe: Abonnieren
       unsubscribe: Abbestellen

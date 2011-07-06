@@ -7,11 +7,17 @@ class NewslettersController < ApplicationController
   before_filter :find_approve_page, :only => :approve
 
   def show
-    @subscriber = MailingSubscriber.new
+    @subscriber = MailingSubscriber.new(:email => params[:email])
     present(@page)
   end
   
   def create
+    if params[:newsletter].blank?
+      flash[:error] = t('newsletters.show.no_selection')
+      redirect_to newsletter_url(:email => params[:email])
+      return
+    end
+    
     @subscriber = MailingSubscriber.where(:email => params[:email]).includes(:subscriptions).first || 
                   MailingSubscriber.new(:email => params[:email])
 
@@ -31,7 +37,7 @@ class NewslettersController < ApplicationController
       end
     else      
       token = Guid.new.to_s
-            
+      
       params[:newsletter].each do |id|
         id = id.to_i
         if public_ids.include?(id)
@@ -57,7 +63,7 @@ class NewslettersController < ApplicationController
         render :action => :show
       end
     else
-      redirect_to newsletter_url
+      redirect_to newsletter_url(:email => params[:email])
     end
     
   end

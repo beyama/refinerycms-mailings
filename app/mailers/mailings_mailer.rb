@@ -2,6 +2,16 @@ require 'liquid'
 
 class MailingsMailer < ActionMailer::Base
   
+  HTML_DEFAULT_TEMPLATE = <<-END
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <body bgcolor="#ffffff" link="#00A1E4" vlink="#00A1E4">
+    <font face="Helvetica Neue, Arial, Helvetica, sans-serif">%s</font>
+  </body>
+</html>
+  END
+
   def confirm(subscriber, token)
     @subscriber = subscriber
     @token = token
@@ -25,7 +35,12 @@ class MailingsMailer < ActionMailer::Base
     
     if templates.blank?
       mail(options) do |format|
-        format.text { render :text => mailing.body }
+        if mailing.body.present?
+          format.text { render :text => mailing.body }
+        end
+        if mailing.html_body.present?
+          format.html { render :text => (HTML_DEFAULT_TEMPLATE % mailing.html_body) }
+        end
       end
     else
       mail(options)  do |format|

@@ -38,7 +38,7 @@ class Admin::MailingsController < Admin::BaseController
         part = mail.parts.find{|part| part.content_type =~ /^text\/plain/ }
         part ? part.body : nil
       elsif mail.content_type =~ /^text\/plain/
-        body.decoded
+        mail.body.decoded
       end
       !body.blank? ? "<html><body><pre>#{body}</pre></body></html>" : nil
     end

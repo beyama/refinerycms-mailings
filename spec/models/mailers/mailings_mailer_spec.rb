@@ -108,4 +108,44 @@ describe MailingsMailer do
     
   end
 
+  describe "Mime-Type rendering without template" do
+    
+    before do
+      create_mailing
+      @mailing.update_attribute(:template, nil)
+    end
+    
+    it "should render plain and html text" do
+      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      
+      mail.should be_multipart
+      mail.parts[0].content_type.should match('text/plain')
+      mail.parts[1].content_type.should match('text/html')
+    end
+    
+    it "should only render plain text if HTML body empty" do
+      @mailing.html_body = ''
+      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      
+      mail.should_not be_multipart
+      mail.body.should match(@mail_attributes[:body])
+    end
+    
+    it "should only render html if plain text body empty" do
+      @mailing.body = ''
+      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      
+      mail.should_not be_multipart
+      mail.body.should match(@mail_attributes[:html_body])
+    end
+    
+    it "should render nothing if html and plain text body empty" do
+      @mailing.body = @mailing.html_body = ''
+      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      
+      mail.should_not be_multipart
+      mail.parts.should be_empty
+    end
+    
+  end
 end

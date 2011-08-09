@@ -1,5 +1,5 @@
 <% selected = params[:newsletter] || [] %>
-<%= form_tag newsletter_url, :method => :post do %>
+<%= form_tag newsletter_url, :method => :post, :id => 'newsletter_form' do %>
   <%= render :partial => "/shared/admin/error_messages", :locals => {
           :object => @subscriber,
           :include_object_name => true
@@ -21,7 +21,7 @@
 								<%= check_box_tag "newsletter[]", newsletter.id, selected.include?(newsletter.id.to_s), :id => dom_id(newsletter) %>
 							</td>
 		          <td>
-		            <h2><%= newsletter.name %></h2>
+		            <%= label_tag dom_id(newsletter), newsletter.name %>
 		            <%=raw newsletter.description  %>
 		          </td>
 		        </tr>

@@ -10,7 +10,7 @@ class MailingsMailer < ActionMailer::Base
     <font face="Helvetica Neue, Arial, Helvetica, sans-serif">%s</font>
   </body>
 </html>
-  END
+END
 
   def confirm(subscriber, token)
     @subscriber = subscriber

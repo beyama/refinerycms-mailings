@@ -60,28 +60,22 @@ en:
       templates:
         actions:
           create_new: Add New Mailing Template
-          reorder: Reorder Mailing Templates
-          reorder_done: Done Reordering Mailing Templates
         records:
           title: Mailing Templates
           sorry_no_results: Sorry! There are no results found.
           no_items_yet: There are no Mailing Templates yet. Click "Add New Mailing Template" to add your first mailing template.
         mailing_template:
-          view_live_html: View this mailing template live <br/><em>(opens in a new window)</em>
           edit: Edit this mailing template
           delete: Remove this mailing template forever
         
       subscribers:
         actions:
           create_new: Add New Subscriber
-          reorder: Reorder Subscribers
-          reorder_done: Done Reordering Subscribers
         records:
           title: Subscribers
           sorry_no_results: Sorry! There are no results found.
           no_items_yet: There are no Subscribers yet.
         subscriber:
-          view_live_html: View this subscriber live <br/><em>(opens in a new window)</em>
           edit: Edit this subscriber
           delete: Remove this subscriber forever
         inline_form:
@@ -90,7 +84,7 @@ en:
   newsletters:
     show:
       confirmation_mail_send: A confirmation mail was sent to '%{to}'.
-      successfully_unsubscribed: TODO
+      successfully_unsubscribed: You have been successfully unsubscribed!
       no_selection: No newsletter selected.
     form:
       subscribe: Subscribe

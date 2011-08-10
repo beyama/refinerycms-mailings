@@ -17,7 +17,7 @@ page = Page.create(
 )
 
 approve = Page.create(
-  :title => 'Newsletter',
+  :title => 'Newsletter approve',
   :link_url => '/newsletter/approve',
   :deletable => false,
   :parent => page,

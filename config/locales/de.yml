@@ -12,7 +12,7 @@ de:
         edit: Bearbeite dieses Mailing
         delete: Lösche dieses Mailing für immer
         sent_at: Gesendet am %{time}
-        finished_at: Fertig at %{time}
+        finished_at: Fertig am %{time}
         mail_sent: Mail gesendet
         test_mail_sent: Test Mail gesendet
       form:
@@ -53,6 +53,7 @@ de:
           sorry_no_results: Tut mir leid, Suche brachte keine Ergebnisse.
           no_items_yet: Es sind noch keine Newsletter angelegt. Klick "Neuen Newsletter anlegen" um deinen ersten Newsletter hinzuzufügen.
         newsletter:
+          view_live_html: Diese Newslettern live betrachten <br/><em>(öffnet sich in einem neuen Fenster)</em>
           edit: Bearbeite diesen Newsletter
           delete: Lösche diesen Newsletter für immer
           
@@ -70,14 +71,11 @@ de:
       subscribers:
         actions:
           create_new: Add New Subscriber
-          reorder: Reorder Subscribers
-          reorder_done: Done Reordering Subscribers
         records:
           title: Subscribers
           sorry_no_results: Sorry! There are no results found.
           no_items_yet: Keine Abonnenten gefunden.
         subscriber:
-          view_live_html: View this subscriber live <br/><em>(opens in a new window)</em>
           edit: Edit this subscriber
           delete: Remove this subscriber forever
         inline_form:

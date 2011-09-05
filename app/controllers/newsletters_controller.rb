@@ -52,7 +52,8 @@ class NewslettersController < ApplicationController
     if updated
       if @subscriber.save
         if token
-          MailingsMailer.confirm(@subscriber, token).deliver
+          host = MailingsMailer.host_from_request(request)
+          MailingsMailer.confirm(@subscriber, token, host).deliver
           flash[:notice] = t('newsletters.show.confirmation_mail_send', :to => @subscriber.email)
         else
           flash[:notice] = t('newsletters.show.successfully_unsubscribed')

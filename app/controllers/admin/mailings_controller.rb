@@ -24,7 +24,8 @@ class Admin::MailingsController < Admin::BaseController
     @mailing.attributes = params[:mailing]
     @mailing.make_urls_absoulute if html
     
-    mail = MailingsMailer.send_mail(@mailing, :to => 'preview@example.org')
+    host = MailingsMailer.host_from_request(request)
+    mail = MailingsMailer.send_mail(@mailing, { :to => 'preview@example.org' }, host)
     
     content = if html
       if mail.multipart?
@@ -56,12 +57,14 @@ class Admin::MailingsController < Admin::BaseController
     @mailing.created_by = current_user if new_record
     @mailing.updated_by = current_user
     
+    host = MailingsMailer.host_from_request(request)
+    
     if @mailing.save
       if params[:test]
-        MailingsMailer.send_mail(@mailing, :to => params[:test_email]).deliver
+        MailingsMailer.send_mail(@mailing, {:to => params[:test_email]}, host).deliver
         flash.notice = t('admin.mailings.mailing.test_mail_sent', :what => "'#{@mailing.subject}'")
       elsif params[:send]
-        job = Delayed::Job.enqueue Refinery::Mailings::NewsletterJob.new(@mailing.id)
+        job = Delayed::Job.enqueue Refinery::Mailings::NewsletterJob.new(@mailing.id, host)
         @mailing.update_attributes :job_id => job.id, :sent_at => Time.now
         flash.notice = t('admin.mailings.mailing.mail_sent', :what => "'#{@mailing.subject}'")
       else

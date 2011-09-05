@@ -28,7 +28,7 @@ describe Refinery::Mailings::NewsletterJob do
     @mailing.save!
   end
   
-  let(:job) { Refinery::Mailings::NewsletterJob.new(@mailing.id, {}) }
+  let(:job) { Refinery::Mailings::NewsletterJob.new(@mailing.id, 'example.com', {}) }
   
   it "should find mailing by id" do
     job.mailing.should == @mailing

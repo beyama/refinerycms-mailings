@@ -1,3 +1,9 @@
+<% flash.each do |key, value| %>
+ <div id='flash' class="flash flash_<%= key %>">
+   <%= value %>
+ </div>
+<% end %>
+
 <% content_for :body_content_left do %>
   <%= render :partial => 'form' %>
 <% end %>

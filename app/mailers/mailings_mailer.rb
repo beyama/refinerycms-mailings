@@ -12,24 +12,32 @@ class MailingsMailer < ActionMailer::Base
 </html>
 END
 
-  def confirm(subscriber, token)
+  class << self
+    def host_from_request(request)
+      subdomain = request.subdomain + '.' if request.subdomain.present? && request.subdomain != "www"
+      [(subdomain || ''), request.domain, request.port_string].join
+    end
+  end
+
+  def confirm(subscriber, token, host)
     @subscriber = subscriber
     @token = token
     @subscriptions = @subscriber.subscriptions.unsended.where(:token => @token).all
+    @host = host
     
     form_address = Refinery::Mailings.confirm_from
     
     mail(:from => form_address, :to => @subscriber.email)
   end
 
-  def send_mail(mailing, options)
+  def send_mail(mailing, options, host)
     options.symbolize_keys!
     
     options = options.merge(:subject => mailing.subject, :from => mailing.from, :data => {})
     
     data = options.delete(:data)
     
-    unsubscribe_url =  url_for(:controller => :pages, :action => :show, :path => "newsletter")
+    unsubscribe_url =  url_for(:controller => :pages, :action => :show, :path => "newsletter", :host => host)
     
     templates = mailing.template.blank? ? nil : MailingTemplate.basename(mailing.template)
     
@@ -60,4 +68,5 @@ END
       
     end
   end
+
 end

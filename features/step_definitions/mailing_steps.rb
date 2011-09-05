@@ -26,5 +26,5 @@ Then /^I should have (\d+) mails?$/ do |count|
 end
 
 When /^after running the mailing job$/ do
-  ::Refinery::Mailings::NewsletterJob.new(Mailing.first).perform
+  ::Refinery::Mailings::NewsletterJob.new(Mailing.first, 'example.com').perform
 end

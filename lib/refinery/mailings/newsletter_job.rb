@@ -1,4 +1,4 @@
-class Refinery::Mailings::NewsletterJob < Struct.new :mailing_id, :options
+class Refinery::Mailings::NewsletterJob < Struct.new :mailing_id, :host, :options
   
   def mailing
     @mailing ||= Mailing.find(self.mailing_id)
@@ -12,7 +12,7 @@ class Refinery::Mailings::NewsletterJob < Struct.new :mailing_id, :options
       opts = self.options || {}
       opts[:to] = subscriber.email
       
-      MailingsMailer.send_mail(@mailing, opts).deliver
+      MailingsMailer.send_mail(@mailing, opts, host).deliver
       
       subscriber.mailings << mailing
       subscriber.save

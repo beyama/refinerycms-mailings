@@ -2,7 +2,7 @@ Willkommen <%= @subscriber.email %>,
 
 bitte klicken Sie, als Bestätigung Ihres Newsletter Abonnements, den folgenden Link:
 
-<%= approve_newsletter_url(:id => @token) %>
+<%= approve_newsletter_url(:id => @token, :host => @host) %>
 
 Durch diese Aktivierung werden Sie Abonnement für folgende Newsletter:
 

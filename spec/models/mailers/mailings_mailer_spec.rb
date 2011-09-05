@@ -33,7 +33,7 @@ describe MailingsMailer do
       RefinerySetting.set(:mailings_confirm_from, "from@example.com")
     end
     
-    let(:mail) { MailingsMailer.confirm(@subscriber, @token) }
+    let(:mail) { MailingsMailer.confirm(@subscriber, @token, 'example.com') }
     
     it "renders the headers" do
       mail.to.should eq(['test@example.org'])
@@ -52,7 +52,7 @@ describe MailingsMailer do
       create_mailing
     end
     
-    let(:mail) { MailingsMailer.send_mail(@mailing, :to => "to@example.org") }
+    let(:mail) { MailingsMailer.send_mail(@mailing, {:to => "to@example.org"}, 'example.com') }
 
     it "renders the headers" do
       mail.subject.should eq(@mailing.subject)
@@ -63,7 +63,7 @@ describe MailingsMailer do
     it "renders the body" do
       body = mail.body.encoded
       body.should match(@mail_attributes[:body])
-      body.should match("http://127.0.0.1:3000/newsletter")
+      body.should match("http://example.com:3000/newsletter")
     end
     
   end
@@ -75,7 +75,7 @@ describe MailingsMailer do
     end
     
     it "should render plain and html text" do
-      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      mail = MailingsMailer.send_mail(@mailing, {:to => "to@example.org"}, 'example.com')
       
       mail.should be_multipart
       mail.parts[0].content_type.should match('text/plain')
@@ -84,7 +84,7 @@ describe MailingsMailer do
     
     it "should only render plain text if HTML body empty" do
       @mailing.html_body = ''
-      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      mail = MailingsMailer.send_mail(@mailing, {:to => "to@example.org"}, 'example.com')
       
       mail.should_not be_multipart
       mail.body.should match(@mail_attributes[:body])
@@ -92,7 +92,7 @@ describe MailingsMailer do
     
     it "should only render html if plain text body empty" do
       @mailing.body = ''
-      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      mail = MailingsMailer.send_mail(@mailing, {:to => "to@example.org"}, 'example.com')
       
       mail.should_not be_multipart
       mail.body.should match(@mail_attributes[:html_body])
@@ -100,7 +100,7 @@ describe MailingsMailer do
     
     it "should render nothing if html and plain text body empty" do
       @mailing.body = @mailing.html_body = ''
-      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      mail = MailingsMailer.send_mail(@mailing, {:to => "to@example.org"}, 'example.com')
       
       mail.should_not be_multipart
       mail.parts.should be_empty
@@ -116,7 +116,7 @@ describe MailingsMailer do
     end
     
     it "should render plain and html text" do
-      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      mail = MailingsMailer.send_mail(@mailing, { :to => "to@example.org" }, 'example.com')
       
       mail.should be_multipart
       mail.parts[0].content_type.should match('text/plain')
@@ -125,7 +125,7 @@ describe MailingsMailer do
     
     it "should only render plain text if HTML body empty" do
       @mailing.html_body = ''
-      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      mail = MailingsMailer.send_mail(@mailing, {:to => "to@example.org"}, 'example.com')
       
       mail.should_not be_multipart
       mail.body.should match(@mail_attributes[:body])
@@ -133,7 +133,7 @@ describe MailingsMailer do
     
     it "should only render html if plain text body empty" do
       @mailing.body = ''
-      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      mail = MailingsMailer.send_mail(@mailing, {:to => "to@example.org"}, 'example.com')
       
       mail.should_not be_multipart
       mail.body.should match(@mail_attributes[:html_body])
@@ -141,7 +141,7 @@ describe MailingsMailer do
     
     it "should render nothing if html and plain text body empty" do
       @mailing.body = @mailing.html_body = ''
-      mail = MailingsMailer.send_mail(@mailing, :to => "to@example.org")
+      mail = MailingsMailer.send_mail(@mailing, {:to => "to@example.org"}, 'example.com')
       
       mail.should_not be_multipart
       mail.parts.should be_empty

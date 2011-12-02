@@ -14,10 +14,10 @@ class Admin::Mailing::SubscribersController < Admin::BaseController
     requested  = MailingNewsletter.find(params[:newsletter])
     to_destroy = current   - requested
     to_create  = requested - current
-    verfied    = Time.now
+    verified   = Time.now
     
     to_create.each do |newsletter|
-      @mailing_subscriber.subscriptions.build(:newsletter => newsletter, :verified_at => verfied)
+      @mailing_subscriber.subscriptions.build(:newsletter => newsletter, :verified_at => verified)
     end
     
     to_destroy.each do |newsletter|

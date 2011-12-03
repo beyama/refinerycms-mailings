@@ -1,3 +1,3 @@
-<ul id='subscribers'>
+<ul id='subscribers' class='<%= ['pagination_frame', pagination_css_class].compact.join(' ') %>'>
   <%= render :partial => 'subscriber', :collection => @mailing_subscribers %>
 </ul>

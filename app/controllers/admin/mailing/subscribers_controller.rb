@@ -3,10 +3,14 @@ class Admin::Mailing::SubscribersController < Admin::BaseController
   
   respond_to :js, :only => :update
 
+  CONDITION = "mailing_newsletter_subscribers.verified_at is not null"
+
   crudify :mailing_subscriber,
           :include => [:newsletters],
-          :conditions => "mailing_newsletter_subscribers.verified_at is not null",
+          :conditions => CONDITION,
+          :search_conditions => CONDITION,
           :title_attribute => 'email', 
+          :order => 'email ASC',
           :xhr_paging => true
 
   def update

@@ -20,7 +20,7 @@ approve = Page.create(
   :title => 'Newsletter approve',
   :link_url => '/newsletter/approve',
   :deletable => false,
-  :parent => page,
+  :parent_id => page.id,
   :show_in_menu => false,
   :position => ((Page.maximum(:position, :conditions => {:parent_id => nil}) || -1)+1)
 )

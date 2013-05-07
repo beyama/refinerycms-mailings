@@ -1,5 +1,7 @@
 h1. Refinery CMS Mailings
 
+*This repository is not maintained anymore.*
+
 Newsletter engine for "Refinery CMS":http://refinerycms.com/.
 
 h2. Features
@@ -9,7 +11,7 @@ Mailings has the following key features:
 * manage one or many subscribable newsletters with HTML description 
 * text- and HTML-mail support
 * liquid template support
-* asynchron email processing through a background job
+* asynchron email processing
 
 h2. Requirements
 
@@ -20,10 +22,10 @@ Follow the instructions on https://github.com/collectiveidea/delayed_job/ .
 
 h2. Installation
 
-To install, add refinerycms_mailings to your @Gemfile@ and run `bundle install`:
+To install, add refinerycms-mailings to your @Gemfile@ and run `bundle install`:
 
 <pre>
-gem 'refinerycms_mailings'
+gem 'refinerycms-mailings'
 </pre>
 
 After Mailings is installed, you will need to generate the migration files and migrate your database:
@@ -37,7 +39,7 @@ h2. How to contribute
 
 If you find what looks like a bug:
 
-# Check the "GitHub issue tracker":http://github.com/beyama/refinerycms_mailings/issues/ to see if anyone else has reported issue.
+# Check the "GitHub issue tracker":http://github.com/beyama/refinerycms-mailings/issues/ to see if anyone else has reported issue.
 # If you don't see anything, create an issue with information on how to reproduce it.
 
 If you want to contribute an enhancement or a fix:
@@ -49,6 +51,6 @@ If you want to contribute an enhancement or a fix:
 
 h2. License
 
-Designed and created by Alexander Jentz, Germany. Represented by "zack boom GmbH":http://www.zackboom.ch/, Switzerland.
+Designed and created by "Alexander Jentz":http://beyama.de, Germany. 
 
 MIT License. See the included MIT-LICENSE file.
